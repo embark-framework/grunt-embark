@@ -1,6 +1,6 @@
 {
   "name": "grunt-embark",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "",
   "main": "Gruntfile.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "license": "ISC",
   "homepage": "",
   "dependencies": {
-    "embark-framework": "^0.9.1",
+    "embark-framework": "^0.9.2",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-coffee": "^0.13.0",
     "grunt-contrib-concat": "^0.5.1",
