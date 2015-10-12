@@ -1,6 +1,6 @@
 module.exports = (grunt) ->
 
-  grunt.registerTask "deploy_contracts", "deploy code", (env_)  =>
+  grunt.registerTask "deploy_contracts", "deploy code", (env_)  ->
     env = env_ || "development"
     contractFiles = grunt.file.expand(grunt.config.get("deploy.contracts"));
     destFile = grunt.config.get("deploy.dest");
@@ -9,10 +9,11 @@ module.exports = (grunt) ->
     Embark.init()
     Embark.blockchainConfig.loadConfigFile('config/blockchain.yml')
     Embark.contractsConfig.loadConfigFile('config/contracts.yml')
-    #abi = Embark.deployContracts(env, contractFiles, destFile)
 
     chainFile = Embark.blockchainConfig.blockchainConfig[env].chains || './chains.json'
 
-    abi = Embark.deployContracts(env, contractFiles, destFile, chainFile)
-    grunt.file.write(destFile, abi);
+    done = @async()
+    Embark.deployContracts env, contractFiles, destFile, chainFile, true, true, (abi) =>
+      grunt.file.write(destFile, abi)
+      done()
 
